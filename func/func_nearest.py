@@ -1,37 +1,49 @@
-import math
+import sys
+from datetime import datetime
+from multiprocessing import Manager, Pool
+
+import openpyxl
+from geopy.distance import geodesic
 
 
-def calculate_nearest_distance(source, coords):
+def calculate_distance(coords1, coords2):
+    return geodesic(coords1, coords2).km
+
+
+def find_nearest_distance(row, coords, manager):
     min_distance = float("inf")
+    nearest_lc = None
 
-    for coord in coords:
-        distance = calculate_distance(source, coord)
-        if distance > 0 and distance < min_distance:
-            min_distance = distance
+    for lc, lat, lon in coords:
+        if lc != row[0]:
+            distance = calculate_distance((row[1], row[2]), (lat, lon))
+            if distance > 0 and distance < min_distance:
+                min_distance = distance
+                nearest_lc = lc
 
-    return min_distance
+    # If all distances are 0, find the nearest non-zero distance
+    if min_distance == 0:
+        for lc, lat, lon in coords:
+            if lc != row[0]:
+                distance = calculate_distance((row[1], row[2]), (lat, lon))
+                if distance > 0:
+                    min_distance = distance
+                    nearest_lc = lc
+                    break
+
+    row[3] = min_distance
+    row.append(nearest_lc)
+    manager.append(row)
 
 
-def calculate_distance(source, destination):
-    lat1, lon1 = source
-    lat2, lon2 = destination
+def process_rows(data, coords):
+    with Manager() as manager:
+        result = manager.list()
 
-    # Mengubah derajat ke radian
-    lat1 = math.radians(lat1)
-    lon1 = math.radians(lon1)
-    lat2 = math.radians(lat2)
-    lon2 = math.radians(lon2)
+        pool = Pool()
+        for row in data:
+            pool.apply_async(find_nearest_distance, args=(row, coords, result))
+        pool.close()
+        pool.join()
 
-    # Menghitung selisih latitude dan longitude
-    dlat = lat2 - lat1
-    dlon = lon2 - lon1
-
-    # Rumus haversine
-    a = (
-        math.sin(dlat / 2) ** 2
-        + math.cos(lat1) * math.cos(lat2) * math.sin(dlon / 2) ** 2
-    )
-    c = 2 * math.atan2(math.sqrt(a), math.sqrt(1 - a))
-    distance = 6371 * c  # Mengubah ke kilometer
-
-    return distance
+        return list(result)
