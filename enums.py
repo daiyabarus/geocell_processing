@@ -48,6 +48,84 @@ class NrCellsHeader(Enum):
     ROWSTART = 2
 
 
+class LTECellsHeader(Enum):
+    CELL = 0
+    ERBS = 1
+    LOCCODE = 2
+    SECTORCARRIERREF = 3
+    TAC = 4
+    CELLID = 5
+    ECI = 6
+    PCI = 7
+    EARFCNDL = 8
+    AZIMUTH = 9
+    BW = 10
+    ERPSECTORSTATUSDESC = 11
+    HBW = 12
+    ANTENNAHEIGHT = 13
+    VBW = 14
+    ANTENNATYPE = 15
+    ELECTRICALANTENNATILT = 16
+    MAXTXPOWER = 17
+    TRANSMITRXTX = 18
+    CONFIGUREDPOWER = 19
+    ISD = 20
+    TOTALSUM = 21
+    LTETECHNOLOGY = 22
+    CATM1 = 23
+    RRU = 24
+    PRODUCTNAME = 25
+    PLMNRESERVED = 26
+    PRIMARYUPPERLAYERIND = 27
+    FREQBAND = 28
+    ESSSCPAIRID = 29
+    CELLRANGE = 30
+    FREQ = 31
+    ENBID = 32
+    ENBID_CELLID = 33
+    LATITUDE = 34
+    LONGITUDE = 35
+    ANT_BEAM = 36
+    ANT_SIZE = 37
+    COLUMN_START = 1
+    COLUMN_END = 38
+    ROW_START = 2
+
+
+class UMTSCellsHeader(Enum):
+    UTRANCELL = 0
+    NODEB = 1
+    LOCCODE = 2
+    CELLID = 3
+    SC = 4
+    LAC = 5
+    RAC = 6
+    UARFCNUL = 7
+    UARFCNDL = 8
+    AZIMUTH = 9
+    HBW = 10
+    ERPSECTORSTATUSDESC = 11
+    FREQUENCY = 12
+    COLUMN_START = 1
+    COLUMN_END = 13
+    ROW_START = 2
+
+
+class GSMCellsHeader(Enum):
+    CELL = 0
+    LOCCODE = 1
+    CI = 2
+    LAC = 3
+    NCC = 4
+    BCC = 5
+    BCCHNO = 6
+    AZIMUTH = 7
+    FREQUENCY = 8
+    COLUMN_START = 1
+    COLUMN_END = 9
+    ROW_START = 2
+
+
 class RadioNodesHeader(Enum):
     NODEID = 1
     ENBID = 2
@@ -62,6 +140,27 @@ class RadioNodesHeader(Enum):
     HWTYPE = 11
     COLUMN_START = 1
     COLUMN_END = 12
+    ROW_START = 2
+
+
+class UMTSNodesHeader(Enum):
+    NODEB = 0
+    LOCCODE = 1
+    RNC = 2
+    NODEBFUNCTIONIUBLINK = 3
+    VENDOR = 4
+    COLUMN_START = 1
+    COLUMN_END = 5
+    ROW_START = 2
+
+
+class GSMNodesHeader(Enum):
+    SITE = 0
+    MSC = 1
+    BSC = 2
+    LOCATIONCODE = 3
+    COLUMN_START = 1
+    COLUMN_END = 4
     ROW_START = 2
 
 
@@ -94,12 +193,74 @@ class SitesHeader(Enum):
     ROW_START = 2
 
 
+class OutputHeader(Enum):
+    NRCELLDUID = 0
+    NODEID = 1
+    LOCCODE = 2
+    GNB_DUFUNCTIONID = 3
+    ADMINISTRATIVESTATE = 4
+    AVAILABILITYSTATUS = 5
+    CELLBARRED = 6
+    CELLLOCALID = 7
+    CELLRESERVEDFOROPERATOR = 8
+    CELLSTATE = 9
+    NCGI = 10
+    NCI = 11
+    NRPCI = 12
+    NRSectorCarrier = 13
+    NRTAC = 14
+    OPERATIONALSTATE = 15
+    QQUALMIN = 16
+    QRXLEVMIN = 17
+    RACHROOTSEQUENCE = 18
+    SSBDURATION = 19
+    SSBFREQUENCY = 20
+    SSBFREQUENCYAUTOSELECTED = 21
+    SSBOFFSET = 22
+    SSBPERIODICITY = 23
+    SSBSUBCARRIERSPACING = 24
+    SUBCARRIERSPACING = 25
+    TDDLTECOEXISTENCE = 26
+    TDDSPECIALSLOTPATTERN = 27
+    TDDULDLPATTERN = 28
+    ARFCNDL = 29
+    ARFCNUL = 30
+    BSCHANNELBWDL = 31
+    BSCHANNELBWUL = 32
+    AZIMUTH = 33
+    ERPSECTORSTATUSDESC = 34
+    FREQ = 35
+    BANDLIST = 36
+    PLMNIDLIST = 37
+    ESSSCPAIRID = 38
+    NRCELLDUUSERLABEL = 39
+    ERPSECTORTECH = 40
+    ENBID = 41
+    SUBNETWORK = 42
+    SYSTEM = 43
+    SWVERSIONID = 44
+    SWRELEASE = 45
+    VENDOR = 46
+    MOCN = 47
+    GNBD = 48
+    HWTYPE = 49
+    ERPSITENAME = 50
+    ERPSECTORELECTDOWNTILT = 51
+    ERPSECTORMECHANICALDOWNTILT = 52
+    ERPSECTORANTENNAOMNIDIRECTIONAL = 53
+    ANTENNABEAMWIDTH = 54
+    ANTENNASIZE = 55
+    COLUMN_START = 1
+    COLUMN_END = 56
+    ROW_START = 2
+
+
 class GcellHelper:
     def __init__(self) -> None:
         pass
 
     @staticmethod
-    def get_header_title():
+    def get_header_nrcells():
         return [
             "nRCellDUId",
             "nodeId",
@@ -155,4 +316,6 @@ class GcellHelper:
             "ERP Sector Elect Downtilt",
             "ERP Sector Mechanical Downtilt",
             "ERP Sector Antenna Omnidirectional",
+            "Antenna Beamwidth",
+            "Antenna Size",
         ]

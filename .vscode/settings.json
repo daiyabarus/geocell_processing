@@ -7,15 +7,15 @@
     "node_modules": true,
     "netstatRemedy.csv": false,
     "newReference.xlsx": false,
-    "Pipfile": true,
-    "Pipfile.lock": true,
+    "Pipfile": false,
+    "Pipfile.lock": false,
     "src/dispatch/static/dispatch/dist/": true
   },
-
-    "workbench.colorTheme": "Dracula",
+    
+    "workbench.colorTheme": "One Dark Pro Darker",
     "window.zoomLevel": -1,
     "editor.tabSize": 2,
-    "editor.accessibilitySupport": "on",
+    "editor.accessibilitySupport": "off",
     "[python]": {
         "editor.formatOnType": true,
         "editor.defaultFormatter": "ms-python.black-formatter"
@@ -27,16 +27,30 @@
         "source.organizeImports": true
     },
     "terminal.integrated.enableMultiLinePasteWarning": false,
-    "editor.fontSize": 16,
+    "editor.fontSize": 14,
     "python.linting.flake8Enabled": true,
     "python.autoComplete.extraPaths": [],
     "python.linting.flake8Args": [
-        "--max-line-length=120",
-        "--ignore=E402,F841,F401,E302,E305,E501,W503",
+        "--max-line-length=160",
+        "--ignore=E402,F841,F401,E302,E305,E501,W503, E713",
     ],
     "python.analysis.extraPaths": [],
     "editor.formatOnPaste": true,
     "explorer.confirmDelete": false,
     "json.schemas": [],
-    
+
+  "editor.semanticTokenColorCustomizations": {
+    "[One Dark Pro]": {
+      // Apply to this theme only
+      "enabled": true,
+      "rules": {
+        "magicFunction:python": "#ee0000",
+        "function.declaration:python": "#990000",
+        "*.decorator:python": "#0000dd",
+        "*.typeHint:python": "#5500aa",
+        "*.typeHintComment:python": "#aaaaaa",
+        "parameter:python": "#aaaaaa"
+      }
+    }
+  }
 }
