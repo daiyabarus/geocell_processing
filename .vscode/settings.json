@@ -27,7 +27,7 @@
         "source.organizeImports": true
     },
     "terminal.integrated.enableMultiLinePasteWarning": false,
-    "editor.fontSize": 14,
+    "editor.fontSize": 13,
     "python.linting.flake8Enabled": true,
     "python.autoComplete.extraPaths": [],
     "python.linting.flake8Args": [
