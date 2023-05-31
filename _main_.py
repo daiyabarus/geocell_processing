@@ -15,7 +15,6 @@ class __create_geocell_data:
         newreference_collector = collectDataAll(newReference_filepath=self.newreference)
 
         for locCode, nrcells in newreference_collector.dtref_nrcells.items():
-            # Unpack values from nrcells
             (
                 nRCellDUId,
                 nodeId,
@@ -61,10 +60,6 @@ class __create_geocell_data:
                 erpSectorTech,
             ) = nrcells
 
-            enbid: str = newreference_collector.collect_ref_radionodes.get(
-                enbid, "NONE"
-            )
-
             self.nrcells_list.append(
                 [
                     nRCellDUId,
@@ -109,15 +104,15 @@ class __create_geocell_data:
                     essScPairId,
                     NRCellDU_userLabel,
                     erpSectorTech,
-                    enbid,
                 ]
             )
 
-        # Create new CSV
+        # create new csv
         current_datetime = datetime.now().strftime("%Y%m%d_%H%M%S")
         final_folder = os.path.dirname(self.newreference)
-        newref_nrcell_file = f"GEO_NRCELL_{current_datetime}.csv"
-        newref_filepath = os.path.join(final_folder, newref_nrcell_file)
+        # newref_basename = os.path.basename(self.newreference)
+        newref_file = f"GEO_NRCELL_{current_datetime}.csv"
+        newref_filepath = os.path.join(final_folder, newref_file)
 
         output_header = GcellHelper.get_header_nrcells()
 

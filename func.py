@@ -20,19 +20,19 @@ class collectDataAll:
         # self.dtref_umtsnodes = dict()
         # self.dtref_gsmnodes = dict()
         self.dtref_sites = dict()
-        self._collect_data()
+        self.collect_data()
 
-    def _collect_data(self):
-        self.__collect_ref_nrcells()
+    def collect_data(self):
+        self.collect_ref_nrcells()
         # self.__coleect_ref_ltecells()
         # self.__collect_ref_umtscells()
         # self.__collect_ref_gsmcells()
-        self.__collect_ref_sites()
-        self.__collect_ref_radionodes()
+        self.collect_ref_sites()
+        self.collect_ref_radionodes()
         # self.__collect_ref_umtsnodes()
         # self.__collect_ref_gsmnodes()
 
-    def __collect_ref_nrcells(self):
+    def collect_ref_nrcells(self):
         if os.path.exists(self.newReference_filepath):
             wb = load_workbook(
                 self.newReference_filepath, read_only=True, data_only=True
@@ -158,7 +158,7 @@ class collectDataAll:
                             erpSectorTech,
                         ]
 
-    def __collect_ref_sites(self):
+    def collect_ref_sites(self):
         if os.path.exists(self.newReference_filepath):
             wb = load_workbook(
                 self.newReference_filepath, read_only=True, data_only=True
@@ -223,7 +223,7 @@ class collectDataAll:
                             lte_shifted,
                         ]
 
-    def __collect_ref_radionodes(self):
+    def collect_ref_radionodes(self):
         if os.path.exists(self.newReference_filepath):
             wb = load_workbook(
                 self.newReference_filepath, read_only=True, data_only=True
@@ -238,13 +238,13 @@ class collectDataAll:
             ):
                 nodeid = str(row[RadioNodesHeader.NODEID.value]).strip()
                 enbid = str(row[RadioNodesHeader.ENBID.value]).strip()
-                loccode_2 = str(row[RadioNodesHeader.ENBID.value]).strip()
+                loccode_2 = str(row[RadioNodesHeader.LOCCODE.value]).strip()
                 subnetwork = str(row[RadioNodesHeader.SUBNETWORK.value]).strip()
                 system = str(row[RadioNodesHeader.SYSTEM.value]).strip()
                 swversionid = str(row[RadioNodesHeader.SWVERSIONID.value]).strip()
                 swrelease = str(row[RadioNodesHeader.SWRELEASE.value]).strip()
                 vendor = str(row[RadioNodesHeader.VENDOR.value]).strip()
-                mocn = str(row[RadioNodesHeader.VENDOR.value]).strip()
+                mocn = str(row[RadioNodesHeader.MOCN.value]).strip()
                 gnbid = str(row[RadioNodesHeader.GNBID.value]).strip()
                 hwtype = str(row[RadioNodesHeader.HWTYPE.value]).strip()
 
